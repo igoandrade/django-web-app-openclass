@@ -1,0 +1,51 @@
+{% extends 'listings/base.html' %}
+
+{% block title %} - {{ band.name }}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>{{ band.name }}</h1>
+        <ul>
+            <li><strong>Gênero:</strong> {{ band.get_genre_display }}</li>
+            <li><strong>Ano de Formação:</strong> {{ band.year_formed }}</li>
+            <li>
+                <strong>Em atividade:</strong>
+                {{ band.active|yesno|capfirst }}
+            </li>
+            {% if band.official_homepage is not None %}
+            <li>
+                <strong>Página oficial:</strong> 
+                <a href="{{band.official_homepage}}" target="_blank">{{band.official_homepage}}</a>
+            </li>
+            {% endif %}
+            {% if band.biography != '' %}
+            <li>
+                <strong>Biografia:</strong>
+                {{ band.biography }}
+            </li>
+            {% endif %}
+        </ul>
+
+        <h2>Músicas</h2>
+        <table class="table table-sm table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th class="text-end">Ano</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for listing in listings %}
+                <tr>
+                    <td>{{listing.title}}</td>
+                    <td>{{listing.get_type_display}}</td>
+                    <td class="text-end">{{listing.year}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

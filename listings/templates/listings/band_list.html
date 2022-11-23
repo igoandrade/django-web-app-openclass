@@ -1,0 +1,20 @@
+{% extends 'listings/base.html' %}
+
+{% block title %} - Bandas favoritas{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Bands</h1>
+    <p>Minhas bandas preferidas são:</p>
+    <ul>
+        {% for band in bands %}
+        <li>
+            <a href="{% url 'band-detail' band.id %}">{{band.name}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock %}
